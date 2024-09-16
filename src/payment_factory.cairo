@@ -87,8 +87,7 @@ pub mod PaymentFactory {
 
             // Create contructor arguments
             let mut constructor_calldata: Array::<felt252> = array![];
-            (creator, store_name, store_wallet_address, payment_token)
-                .serialize(ref constructor_calldata);
+            (store_name, store_wallet_address, payment_token).serialize(ref constructor_calldata);
 
             // Contract deployment
             let (contract_address, _) = deploy_syscall(
