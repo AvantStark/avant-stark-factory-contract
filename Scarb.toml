@@ -1,0 +1,20 @@
+[package]
+name = "avs_payment_factory"
+version = "0.1.0"
+description = "Payment Factory Contract of AvantStark - The Open-Source Starknet Payment Processor"
+homepage = "https://avantstark.com"
+cairo-version = ">=2.7.0"
+
+# See more keys and their definitions at https://docs.swmansion.com/scarb/docs/reference/manifest
+
+[[target.starknet-contract]]
+sierra = true
+casm = true
+allowed-libfuncs-list.name = "experimental"
+
+[dependencies]
+starknet = "2.7.0"
+openzeppelin = { git = "https://github.com/OpenZeppelin/cairo-contracts.git", tag = "v0.15.0" }
+
+[tool.snforge]
+# exit_first = true
