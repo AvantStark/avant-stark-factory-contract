@@ -6,6 +6,7 @@ pub trait IPaymentFactory<TContractState> {
         ref self: TContractState,
         store_name: felt252,
         store_wallet_address: ContractAddress,
+        owner: ContractAddress,
         payment_token: ContractAddress
     ) -> ContractAddress;
     fn get_payment_class_hash(self: @TContractState) -> ClassHash;
@@ -104,6 +105,7 @@ pub mod PaymentFactory {
             ref self: ContractState,
             store_name: felt252,
             store_wallet_address: ContractAddress,
+            owner: ContractAddress,
             payment_token: ContractAddress
         ) -> ContractAddress {
             self.pausable.assert_not_paused();
@@ -111,7 +113,8 @@ pub mod PaymentFactory {
 
             // Create contructor arguments
             let mut constructor_calldata: Array::<felt252> = array![];
-            (store_name, store_wallet_address, payment_token).serialize(ref constructor_calldata);
+            (store_name, store_wallet_address, owner, payment_token)
+                .serialize(ref constructor_calldata);
 
             // Contract deployment
             let (contract_address, _) = deploy_syscall(
